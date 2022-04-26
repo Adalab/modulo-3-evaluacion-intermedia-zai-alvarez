@@ -25,20 +25,39 @@ function App() {
     });
   };
   const htmlData = data
+    .map((phrase, i) => {
+      return (
+        <li key={i}>
+          <p>{phrase.quote}</p>
+          <p>{phrase.character}</p>
+        </li>
+      )
+    })
   return (
     <div className="App">
 
-      {/*HEADER*/}
+
       <header>
         <h1>Freases de Friends</h1>
         <form action="">
+          <input
+            type='text'
+            name='searchPhrase'
+            id='searchPhrase'
 
+          />
+          <input
+            type='text'
+            name='searchCharacter'
+            id='searchCharacter'
+
+          />
         </form>
       </header>
       <main>
-        {/* lista de frases */}
+
         <ul>{htmlData}</ul>
-        {/*nueva frase */}
+
         <form action="">
           <h2>Añadir una nueva frase</h2>
           <input
