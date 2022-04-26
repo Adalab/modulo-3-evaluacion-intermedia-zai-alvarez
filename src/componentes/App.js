@@ -5,10 +5,19 @@ import { useState } from 'react';
 
 function App() {
   const [data, setData] = useState(listPhrases);
+
   const [newPhrase, setNewPhrase] = useState({
     quote: '',
     character: '',
   })
+
+  const [filterPhrase, setFilterPhrase] = useState('');
+  const handleFilter = (ev) => {
+    setFilterPhrase(ev.currentTarget.value);
+  }
+
+
+
 
   const handleNewContact = (ev) => {
     setNewPhrase({
@@ -25,6 +34,12 @@ function App() {
     });
   };
   const htmlData = data
+    .filter(
+      (phrase) =>
+        phrase.quote.toLowerCase().includes(filterPhrase.toLowerCase()))
+    .filter((phrase) =>
+      phrase.character.toLowerCase().includes(filterPhrase.toLowerCase()))
+
     .map((phrase, i) => {
       return (
         <li key={i}>
@@ -33,23 +48,25 @@ function App() {
         </li>
       )
     })
+
   return (
     <div className="App">
-
-
       <header>
         <h1>Freases de Friends</h1>
         <form action="">
-          <input
+          Filtrar por frase<input
             type='text'
             name='searchPhrase'
             id='searchPhrase'
+            onChange={handleFilter}
 
           />
+          Filtrar por personaje
           <input
             type='text'
             name='searchCharacter'
             id='searchCharacter'
+            onChange={handleFilter}
 
           />
         </form>
